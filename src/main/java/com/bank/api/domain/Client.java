@@ -27,13 +27,22 @@ public class Client implements Serializable {
 
     private String endereco;
 
+    private String telefone;
+    private String senha;
+    private String banco;
+    private String conta;
+
     public Client() {
     }
 
-    public Client(Long id, String nome, String endereco) {
+    public Client(Long id, String nome, String endereco, String telefone, String senha, String banco, String conta) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
+        this.telefone = telefone;
+        this.senha = senha;
+        this.banco = banco;
+        this.conta = conta;
     }
 
     @Override
@@ -41,7 +50,7 @@ public class Client implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return Objects.equals(id, client.id);
+        return id.equals(client.id);
     }
 
     @Override
