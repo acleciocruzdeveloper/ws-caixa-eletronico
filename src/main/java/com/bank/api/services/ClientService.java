@@ -1,8 +1,8 @@
 package com.bank.api.services;
 
 
-import com.bank.api.domain.Client;
-import com.bank.api.repositories.ClientRepository;
+import com.bank.api.domain.Cliente;
+import com.bank.api.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,24 +13,19 @@ import java.util.Optional;
 public class ClientService {
 
     @Autowired
-    private ClientRepository repository;
+    private ClienteRepository repository;
 
-    public List<Client> findAll() {
+    public List<Cliente> findAll() {
         return repository.findAll();
     }
 
-    public Client findById(Long id) {
-        Optional<Client> o = repository.findById(id);
+    public Cliente findById(Long id) {
+        Optional<Cliente> o = repository.findById(id);
         return o.get();
     }
-
-    public void save(Client client){
-        Client obj  = new Client();
-        repository.save(obj);
+    
+    public Cliente umNovoCliente(Cliente cliente) {
+    	return repository.save(cliente);
     }
 
-    public void removerClient(){
-        Client obj = new Client();
-        repository.delete(obj);
-    }
 }

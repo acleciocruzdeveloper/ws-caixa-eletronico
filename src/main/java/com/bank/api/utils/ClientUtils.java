@@ -1,52 +1,59 @@
 package com.bank.api.utils;
 
-import com.bank.api.domain.Bank;
-import com.bank.api.domain.Client;
-import com.bank.api.domain.Conta;
-import com.bank.api.enums.TipoConta;
-import com.bank.api.repositories.BankRepository;
-import com.bank.api.repositories.ClientRepository;
-import com.bank.api.repositories.ContaRepository;
+import java.time.Instant;
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import java.time.Instant;
-import java.util.Arrays;
+import com.bank.api.domain.Banco;
+import com.bank.api.domain.Cliente;
+import com.bank.api.domain.Conta;
+import com.bank.api.enums.TipoConta;
+import com.bank.api.repositories.BancoRepository;
+import com.bank.api.repositories.ClienteRepository;
+import com.bank.api.repositories.ContaRepository;
 
 @Configuration
 @Profile("test")
 public class ClientUtils implements CommandLineRunner {
 
+	@Autowired
+	private ClienteRepository clienteRepository;
 
-    @Autowired
-    private ClientRepository repository;
+	@Autowired
+	private BancoRepository bancoRepository;
 
-    @Autowired
-    private BankRepository bankRepository;
+	@Autowired
+	private ContaRepository contaRepository;
 
-    @Autowired
-    private ContaRepository contaRepository;
+	@Override
+	public void run(String... args) throws Exception {
 
-    @Override
-    public void run(String... args) throws Exception {
+		Cliente c1 = Cliente.builder().id(null).nome("Ghuilherme Santiago").endereco("Rua Anhanguera")
+				.telefone("(62) 5569-3322").build();
+		Cliente c2 = Cliente.builder().id(null).nome("Raimundo Nonanto").endereco("Avenida Lucena Roriz")
+				.telefone("(58) 5544-3355").build();
 
-        Client c1 = new Client(null, "Ghuilherme Santiago", "Rua Anhanguera", "(62) 5569-3625");
-        Client c2 = new Client(null, "Raimundo Nonanto", "Avenida Lucena Roriz", "(61) 3623-2525");
+		Banco bancoUm = Banco.builder().agencia(null).nomeAgencia("Agência Brasília")
+				.endereco("SQSW 05, Bloco A, Loja 25 - Suoeste /DF").telefone("(61) 5555-3322").build();
 
-        Bank b1 = new Bank(null, "Agencia Itamaraty", "Avenida das Nações", "(61) 1525-3333");
-        Bank b2 = new Bank(null, "Agência Belo Horizonte", "Ouro Preto", "(61) 1525-3333");
+		Banco bancoDois = Banco.builder().agencia(null).nomeAgencia("Agência São Paulo")
+				.endereco("São Paulo - São Paulo /SP").telefone("(11) 2222-3322").build();
 
-        Conta ct1 = new Conta(null, Instant.parse("2011-12-03T10:15:30Z"), b2, c1,  TipoConta.CONTA_CORRENTE);
-        Conta ct2 = new Conta(null, Instant.parse("2012-11-03T15:15:30Z"), b1, c2,  TipoConta.CONTA_POUPANCA);
+		Conta contaUm = Conta.builder().numeroConta(null).dataAbertura(Instant.parse("2019-04-08T14:32:24Z"))
+				.cliente(c1).banco(bancoUm).tipoConta(TipoConta.CONTA_CORRENTE).build();
 
-        repository.saveAll(Arrays.asList(c1, c2));
+		Conta contaDois = Conta.builder().numeroConta(null).dataAbertura(Instant.parse("2019-04-09T11:52:27Z"))
+				.cliente(c2).banco(bancoDois).tipoConta(TipoConta.CONTA_POUPANCA).build();
 
-        bankRepository.saveAll(Arrays.asList(b1, b2));
+		clienteRepository.saveAll(Arrays.asList(c1, c2));
 
-        contaRepository.saveAll(Arrays.asList(ct1, ct2));
+		bancoRepository.saveAll(Arrays.asList(bancoUm, bancoDois));
 
+		contaRepository.saveAll(Arrays.asList(contaUm, contaDois));
 
-    }
+	}
 }

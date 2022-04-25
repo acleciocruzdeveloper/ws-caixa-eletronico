@@ -1,17 +1,11 @@
 package com.bank.api.domain;
 
 import java.io.Serializable;
-import java.time.Instant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-import com.bank.api.enums.TipoConta;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,34 +17,29 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Builder
-@Getter
-@Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
+@Builder
+@ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Conta implements Serializable {
+public class Cliente implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	
-	@Id
 	@EqualsAndHashCode.Include
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long numeroConta;
+	private Long id;
 
 	@NonNull
-	private Instant dataAbertura;
-	
+	private String nome;
+
 	@NonNull
-	@OneToOne()
-	@JsonIgnore
-	private Banco banco;
-	
+	private String endereco;
+
 	@NonNull
-	@ManyToOne
-	private Cliente cliente;
-	
-	@NonNull
-	private TipoConta tipoConta;	
+	private String telefone;
 	
 }

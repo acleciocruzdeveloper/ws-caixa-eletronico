@@ -1,17 +1,14 @@
 package com.bank.api.domain;
 
+
 import java.io.Serializable;
-import java.time.Instant;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-import com.bank.api.enums.TipoConta;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,34 +20,31 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Conta implements Serializable {
+public class Banco implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@Id
+
 	@EqualsAndHashCode.Include
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long numeroConta;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long agencia;	
 
 	@NonNull
-	private Instant dataAbertura;
-	
+    private String nomeAgencia;	
+
 	@NonNull
-	@OneToOne()
-	@JsonIgnore
-	private Banco banco;
-	
+    private String endereco;
+
 	@NonNull
-	@ManyToOne
-	private Cliente cliente;
-	
-	@NonNull
-	private TipoConta tipoConta;	
-	
+    private String telefone;
+
+	@OneToMany(mappedBy = "banco")
+	private List<Conta> conta;
+    
 }

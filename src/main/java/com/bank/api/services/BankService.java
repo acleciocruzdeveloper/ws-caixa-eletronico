@@ -1,37 +1,27 @@
 package com.bank.api.services;
 
-import com.bank.api.domain.Bank;
-import com.bank.api.domain.Client;
-import com.bank.api.repositories.BankRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.bank.api.domain.Banco;
+import com.bank.api.repositories.BancoRepository;
 
 @Service
 public class BankService {
 
     @Autowired
-    private BankRepository repository;
+    private BancoRepository repository;
 
-    public List<Bank> findAll() {
+    public List<Banco> findAll() {
         return repository.findAll();
     }
 
-    public Bank findById(Long id) {
-        Optional<Bank> o = repository.findById(id);
+    public Banco findById(Long id) {
+        Optional<Banco> o = repository.findById(id);
         return o.get();
-    }
-
-    public void save(Bank bank){
-        Bank obj  = new Bank();
-        repository.save(obj);
-    }
-
-    public void removerClient(){
-        Bank obj = new Bank();
-        repository.delete(obj);
     }
 
 }

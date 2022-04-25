@@ -10,32 +10,25 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.bank.api.domain.Client;
-import com.bank.api.repositories.ClientRepository;
+import com.bank.api.domain.Cliente;
+import com.bank.api.repositories.ClienteRepository;
 
 @ExtendWith(SpringExtension.class)
 public class ClientServiceTest {
 
 
     @Mock
-    private ClientRepository repository;
+    private ClienteRepository repository;
     @Mock
     private ClientService service;
 
     @Test
     public void deveBuscarTodosClientes() {
 
-        List<Client> clientList = new ArrayList<>();
+        List<Cliente> clientList = new ArrayList<>();
 
         when(service.findAll()).thenReturn(clientList);
 
     }
-
-    @Test
-    public void deveBuscarUmCliente() {
-        Client c1 = new Client();
-
-        //when(repository.findById(c1.getId())).thenReturn(Optional.of(c1));
-
-    }
+   
 }
