@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -17,7 +18,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @AllArgsConstructor
@@ -25,7 +25,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @Builder
-@ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Banco implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -45,6 +44,7 @@ public class Banco implements Serializable {
     private String telefone;
 
 	@OneToMany(mappedBy = "banco")
+	@Setter(value = AccessLevel.PRIVATE)
 	private List<Conta> conta;
     
 }

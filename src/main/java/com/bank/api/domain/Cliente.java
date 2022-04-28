@@ -14,7 +14,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
@@ -22,14 +21,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @Builder
-@ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Cliente implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 	
-	@EqualsAndHashCode.Include
 	@Id
+	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 

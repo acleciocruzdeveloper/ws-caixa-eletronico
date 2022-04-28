@@ -27,5 +27,22 @@ public class ClientService {
     public Cliente umNovoCliente(Cliente cliente) {
     	return repository.save(cliente);
     }
+    
+    public void apagarUmCliente(Long id) {
+    	repository.deleteById(id);
+    
+    }
+    
+    public Cliente atualizar(Long id, Cliente cliente) {
+    	Cliente obj = repository.getById(id);
+    	atualizarDados(cliente, obj);
+    	return repository.save(cliente);
+    }
+
+	private void atualizarDados(Cliente cliente, Cliente obj) {
+		cliente.setNome(obj.getNome());
+		cliente.setEndereco(obj.getEndereco());
+		cliente.setTelefone(obj.getTelefone());
+	}
 
 }
