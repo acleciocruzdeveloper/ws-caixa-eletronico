@@ -1,25 +1,13 @@
 package com.bank.api.domain;
 
-import java.io.Serializable;
-import java.time.Instant;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
 import com.bank.api.enums.TipoConta;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.Instant;
 
 @Entity
 @Builder
@@ -38,17 +26,20 @@ public class Conta implements Serializable {
 
 	@NonNull
 	private Instant dataAbertura;
-	
+
 	@NonNull
 	@OneToOne()
 	@JsonIgnore
-	private Banco banco;
+	private AgenciaBancaria agenciaBancaria;
 	
 	@NonNull
 	@ManyToOne
 	private Cliente cliente;
 	
 	@NonNull
-	private TipoConta tipoConta;	
+	private TipoConta tipoConta;
+
+	@NonNull
+	private BigDecimal depositoInicial;
 	
 }

@@ -46,10 +46,10 @@ public class ClientResource {
 	@PostMapping
 	@ApiOperation(value = "Cadastra um novo cliente")
 	public ResponseEntity<Cliente> insert(@RequestBody Cliente cliente) {
-		Cliente umNovoCliente = service.umNovoCliente(cliente);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(umNovoCliente.getId())
+		Cliente novoCliente = service.umNovoCliente(cliente);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novoCliente.getId())
 				.toUri();
-		return ResponseEntity.created(uri).body(umNovoCliente);
+		return ResponseEntity.created(uri).body(novoCliente);
 
 	}
 
