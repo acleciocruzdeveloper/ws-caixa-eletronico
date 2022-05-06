@@ -1,23 +1,12 @@
 package com.bank.api.domain;
 
 
+import com.bank.api.enums.Banco;
+import lombok.*;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
 
 @Entity
 @AllArgsConstructor
@@ -26,13 +15,16 @@ import lombok.Setter;
 @Setter
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Banco implements Serializable {
+public class AgenciaBancaria implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EqualsAndHashCode.Include
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long agencia;	
+    private Long agencia;
+
+	@NonNull
+	private Banco banco;
 
 	@NonNull
     private String nomeAgencia;	
@@ -43,7 +35,7 @@ public class Banco implements Serializable {
 	@NonNull
     private String telefone;
 
-	@OneToMany(mappedBy = "banco")
+	@OneToMany(mappedBy = "agenciaBancaria")
 	@Setter(value = AccessLevel.PRIVATE)
 	private List<Conta> conta;
     

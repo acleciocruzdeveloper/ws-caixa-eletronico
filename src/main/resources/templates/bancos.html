@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/css/style.css}">
+    <title>NTT DATA - Caixa Eletrônico</title>
+
+    <style>
+        .card-image {
+    position: relative;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+.card:hover .card-overlay {
+    opacity: 1;
+  }
+
+
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid justify-content-fluid">
+        <img th:src="@{/img/nttdata.png}" alt="" width="10%" height="2%" class="d-inline-block align-text-center"/>
+        <span class="navbar-brand mb-0 h1 " style="padding-left: 15px; font-weight: 700;"> Bank's </span>
+    </div>
+</nav>
+
+<div class="container" style="display: flex; justify-content: space-between; ">
+    <div class="card" style="width: 18rem;">
+        <img th:class="@{/img/card-img-top}" src="/santander.png" alt="Card image cap">
+        <div class="card-overlay"></div>
+        <div class="card-body">
+            <!--            <h5 class="card-title">Card title</h5>-->
+            <!--            <p class="card-text">Some quick example text.</p>-->
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" th:src="@{/img/logobb.png}" alt="Card image cap">
+        <div class="card-overlay"></div>
+        <div class="card-body">
+            <!--            <h5 class="card-title">Card title</h5>-->
+            <!--            <p class="card-text">Some quick example text.</p>-->
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="/img/bradesco.png" alt="Card image cap">
+        <div class="card-overlay"></div>
+        <div class="card-body">
+            <!--            <h5 class="card-title">Card title</h5>-->
+            <!--            <p class="card-text">Some quick example text.</p>-->
+        </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" th:src="@{/itau.png}" alt="Card image cap">
+        <div class="card-overlay"></div>
+        <div class="card-body">
+            <!--            <h5 class="card-title">Card title</h5>-->
+            <!--            <p class="card-text">Some quick example text.</p>-->
+        </div>
+    </div>
+</div>
+<hr>
+
+<section style="width:60%;">
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Banco</th>
+            <th>Agência</th>
+            <th>Endereço</th>
+            <th>Telefone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="banco : ${bancos}">
+            <td th:text="${banco.agencia}"></td>
+            <td th:text="${banco.banco}"></td>
+            <td th:text="${banco.nomeAgencia}"></td>
+            <td th:text="${banco.endereco}"></td>
+            <td th:text="${banco.telefone}"></td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+</body>
+
+</html>
